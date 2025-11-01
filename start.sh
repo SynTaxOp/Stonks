@@ -4,7 +4,7 @@ echo "🚀 Starting Stonks Application..."
 
 # Kill existing processes
 echo "🔄 Stopping existing processes..."
-kill -9 $(lsof -t -i:8081) 2>/dev/null || true
+kill -9 $(lsof -t -i:8080) 2>/dev/null || true
 kill -9 $(lsof -t -i:3000) 2>/dev/null || true
 pkill -f "react-scripts start" 2>/dev/null || true
 sleep 2
@@ -22,10 +22,10 @@ else
 fi
 BACKEND_PID=$!
 
-echo "⏳ Waiting for backend to start on port 8081..."
-# Wait for backend to be ready (check port 8081)
+echo "⏳ Waiting for backend to start on port 8080..."
+# Wait for backend to be ready (check port 8080)
 for i in {1..60}; do
-  if lsof -ti:8081 > /dev/null 2>&1; then
+  if lsof -ti:8080 > /dev/null 2>&1; then
     echo "✅ Backend is ready!"
     sleep 2
     break
@@ -47,11 +47,11 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Set environment variables
-export REACT_APP_API_URL=http://localhost:8081
+export REACT_APP_API_URL=http://localhost:8080
 
 echo "🚀 Starting React development server..."
 echo "📱 Frontend will be available at: http://localhost:3000"
-echo "🔗 Backend API URL: http://localhost:8081"
+echo "🔗 Backend API URL: http://localhost:8080"
 echo ""
 echo "✅ Both services are starting..."
 echo "📋 Backend logs: backend.log"

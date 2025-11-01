@@ -48,7 +48,7 @@ pkill -f "react-scripts start" 2>/dev/null || true
 sleep 1
 
 # Set environment variables
-export REACT_APP_API_URL=http://localhost:8081
+export REACT_APP_API_URL=http://localhost:8080
 
 echo "🌐 Frontend will be available at: http://localhost:3000"
 echo "🔗 Backend API URL: $REACT_APP_API_URL"

@@ -118,3 +118,12 @@ backend.log
 # Maven wrapper (optional - comment out if you want to commit wrapper)
 # !.mvn/wrapper/maven-wrapper.jar
 # !.mvn/wrapper/maven-wrapper.properties
+
+### Docker ###
+# Docker environment files (create .env.example instead)
+.env
+.env.local
+.env.*.local
+
+# Docker volumes (if used)
+docker-data/

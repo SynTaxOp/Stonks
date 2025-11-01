@@ -20,12 +20,12 @@ else
 fi
 
 # Check if backend is running
-if curl -s http://localhost:8081/api/dashboard > /dev/null 2>&1; then
-    echo "✅ Backend API is accessible at http://localhost:8081"
+if curl -s http://localhost:8080/api/dashboard > /dev/null 2>&1; then
+    echo "✅ Backend API is accessible at http://localhost:8080"
 else
-    echo "⚠️  Backend API is not accessible at http://localhost:8081"
+    echo "⚠️  Backend API is not accessible at http://localhost:8080"
 fi
 
 echo ""
 echo "🌐 Frontend URL: http://localhost:3000"
-echo "🔗 Backend URL: http://localhost:8081"
+echo "🔗 Backend URL: http://localhost:8080"
