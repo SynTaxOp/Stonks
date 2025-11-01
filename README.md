@@ -62,40 +62,48 @@ A comprehensive full-stack application for tracking and managing mutual fund inv
 
 ### Option 1: Docker (Recommended) 🐳
 
-The easiest and most consistent way to run the entire application:
+The easiest and most consistent way to run the entire application using a single Dockerfile that builds both frontend and backend separately, then runs them as connected services:
 
 ```bash
 # 1. Clone the repository
 git clone <repository-url>
 cd Stonks
 
-# 2. Create .env file with your MongoDB URI
+# 2. Create .env file with your MongoDB URI (optional)
 cp .env.example .env
-# Edit .env and add your MongoDB connection string:
+# Edit .env and add your MongoDB connection string if needed:
 # MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/...
 
-# 3. Build Docker image (builds both backend and frontend)
-docker build -t stonks-app .
+# 3. Build and start with Docker Compose (Recommended)
+docker-compose up -d --build
 
-# 4. Start container
-docker run -d --name stonks-app \
-  -p 8080:8080 \
-  -e SPRING_DATA_MONGODB_URI="your-mongodb-uri" \
-  stonks-app
+# This will:
+# - Build backend (Spring Boot) on port 8080
+# - Build frontend (React + Nginx) on port 80
+# - Frontend automatically proxies /api/* requests to backend
 
-# 5. Access the application
-# Frontend & Backend: http://localhost:8080
-# API: http://localhost:8080/api/*
+# 4. Access the application
+# Frontend: http://localhost (or http://localhost:80)
+# Backend API: http://localhost:8080/api/*
+# All API calls from frontend are automatically proxied to backend
 ```
 
-**Using Docker Compose (if available):**
+**Alternative: Build individual services:**
 
 ```bash
-# Build and start all services with one command
-docker-compose up -d
+# Build backend only
+docker build --target backend-runtime -t stonks-backend .
 
-# Or for development mode with hot-reload
-docker-compose -f docker-compose.dev.yml up
+# Build frontend only  
+docker build --target frontend-runtime -t stonks-frontend .
+
+# Run separately (using Docker Compose is easier)
+```
+
+**For Development with hot-reload:**
+
+```bash
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
 **Docker Commands:**
