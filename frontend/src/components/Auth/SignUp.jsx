@@ -140,7 +140,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
   const passwordInfo = passwordStrength();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
@@ -170,7 +170,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
         </div>
 
         {/* Main Content Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100 dark:border-gray-700">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             {/* Left Side - Benefits */}
             <div className="hidden md:block">
@@ -178,7 +178,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                 <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Why Join Stonks?</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Why Join Stonks?</h3>
               </div>
               <div className="space-y-5">
                 {benefits.map((benefit, index) => {
@@ -189,8 +189,8 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                         <Icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-gray-900 font-semibold text-lg">{benefit.text}</h4>
-                        <p className="text-gray-500 text-sm mt-1">{benefit.description}</p>
+                        <h4 className="text-gray-900 dark:text-gray-100 font-semibold text-lg">{benefit.text}</h4>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{benefit.description}</p>
                       </div>
                     </div>
                   );
@@ -205,11 +205,11 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                   <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
                     <UserPlus className="w-5 h-5 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                     Create Account
                   </h2>
                 </div>
-                <p className="text-gray-600 mt-2">
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
                   Start tracking your investments today
                 </p>
               </div>
@@ -217,7 +217,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
               <form className="space-y-5" onSubmit={handleSubmit}>
                 {/* Full Name */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Full Name
                   </label>
                   <input
@@ -227,9 +227,9 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                     required
                     className={`w-full px-4 py-3 rounded-xl border-2 ${
                       errors.name 
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                        : 'border-gray-200 focus:border-purple-500 focus:ring-purple-500'
-                    } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                        ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
+                        : 'border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400'
+                    } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={handleChange}
@@ -245,7 +245,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
 
                 {/* Login ID */}
                 <div>
-                  <label htmlFor="loginId" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="loginId" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Login ID
                   </label>
                   <input
@@ -255,9 +255,9 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                     required
                     className={`w-full px-4 py-3 rounded-xl border-2 ${
                       errors.loginId 
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                        : 'border-gray-200 focus:border-purple-500 focus:ring-purple-500'
-                    } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                        ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
+                        : 'border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400'
+                    } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                     placeholder="Choose a unique login ID"
                     value={formData.loginId}
                     onChange={handleChange}
@@ -273,7 +273,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
 
                 {/* Password */}
                 <div>
-                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Password
                   </label>
                   <div className="relative">
@@ -284,9 +284,9 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                       required
                       className={`w-full px-4 py-3 pr-12 rounded-xl border-2 ${
                         errors.password 
-                          ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                          : 'border-gray-200 focus:border-purple-500 focus:ring-purple-500'
-                      } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                          ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
+                          : 'border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400'
+                      } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                       placeholder="Create a password (min 6 characters)"
                       value={formData.password}
                       onChange={handleChange}
@@ -325,7 +325,7 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
 
                 {/* Confirm Password */}
                 <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -336,11 +336,11 @@ const SignUp = ({ onSignup, onSwitchToLogin }) => {
                       required
                       className={`w-full px-4 py-3 pr-12 rounded-xl border-2 ${
                         errors.confirmPassword 
-                          ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
+                          ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
                           : formData.confirmPassword && formData.password === formData.confirmPassword
-                          ? 'border-green-300 focus:border-green-500 focus:ring-green-500'
-                          : 'border-gray-200 focus:border-purple-500 focus:ring-purple-500'
-                      } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                          ? 'border-green-300 dark:border-green-600 focus:border-green-500 dark:focus:border-green-400 focus:ring-green-500 dark:focus:ring-green-400'
+                          : 'border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400'
+                      } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={handleChange}

@@ -6,6 +6,7 @@ import {
   LogOut,
   RefreshCw
 } from 'lucide-react';
+import ThemeToggle from '../common/ThemeToggle.jsx';
 
 const DashboardNavigation = ({ currentView, onViewChange, onLogout, onRefresh, user }) => {
   const navigationItems = [
@@ -62,6 +63,9 @@ const DashboardNavigation = ({ currentView, onViewChange, onLogout, onRefresh, u
 
           {/* Enhanced Right Actions */}
           <div className="flex items-center space-x-3">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Refresh Button */}
             {onRefresh && (
               <button

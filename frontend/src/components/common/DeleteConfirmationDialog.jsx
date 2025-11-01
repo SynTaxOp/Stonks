@@ -32,20 +32,20 @@ const DeleteConfirmationDialog = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
         <div className="p-6">
           {/* Header with Icon */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                <AlertTriangle className="w-6 h-6 text-red-600" />
+              <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
             </div>
             <button
               onClick={handleClose}
               disabled={isLoading}
-              className="text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors disabled:opacity-50"
             >
               <X className="w-6 h-6" />
             </button>
@@ -53,18 +53,18 @@ const DeleteConfirmationDialog = ({
 
           {/* Warning Message */}
           <div className="mb-6">
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+            <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-600 p-4 rounded-lg">
               <div className="flex items-start">
-                <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" />
-                <p className="text-sm text-red-800 leading-relaxed">{warningMessage}</p>
+                <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0" />
+                <p className="text-sm text-red-800 dark:text-red-300 leading-relaxed">{warningMessage}</p>
               </div>
             </div>
           </div>
 
           {/* Confirmation Input */}
           <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Type <span className="font-mono bg-gray-100 px-2 py-1 rounded">{confirmationWord}</span> to confirm:
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Type <span className="font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100">{confirmationWord}</span> to confirm:
             </label>
             <input
               type="text"
@@ -73,9 +73,9 @@ const DeleteConfirmationDialog = ({
               disabled={isLoading}
               className={`w-full px-4 py-3 rounded-xl border-2 ${
                 confirmationInput && !isConfirmDisabled
-                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-200 focus:border-gray-400 focus:ring-gray-400'
-              } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed`}
+                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-gray-200 dark:border-gray-600 focus:border-gray-400 dark:focus:border-gray-500 focus:ring-gray-400 dark:focus:ring-gray-500'
+              } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed`}
               placeholder={`Type "${confirmationWord}" to confirm`}
               autoFocus
             />
@@ -86,16 +86,16 @@ const DeleteConfirmationDialog = ({
             <button
               onClick={handleClose}
               disabled={isLoading}
-              className="px-6 py-2.5 bg-gray-100 text-gray-700 text-base font-semibold rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-base font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {cancelText}
             </button>
             <button
               onClick={handleConfirm}
               disabled={isConfirmDisabled}
-              className={`px-6 py-2.5 text-base font-semibold rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+              className={`px-6 py-2.5 text-base font-semibold rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                 isConfirmDisabled
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 focus:ring-red-500'
               }`}
             >

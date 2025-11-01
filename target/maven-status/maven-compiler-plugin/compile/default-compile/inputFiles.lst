@@ -5,6 +5,7 @@
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/config/CorsFilter.java
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/config/MongoConfig.java
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/config/RestClientConfig.java
+/Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/config/WebConfig.java
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/controller/DashboardController.java
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/controller/SIPController.java
 /Users/srejanbera/Workspace/Stonks/src/main/java/com/stonks/controller/TransactionController.java

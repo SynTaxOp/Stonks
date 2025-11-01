@@ -34,6 +34,7 @@ com/stonks/dto/FundSummaryDTO.class
 com/stonks/dto/UserDTO.class
 com/stonks/dto/FundDTO.class
 com/stonks/controller/UserFundPageController.class
+com/stonks/config/WebConfig.class
 com/stonks/dto/SIPDTO.class
 com/stonks/StocksApiApplication.class
 com/stonks/util/ExternalApiClient.class
@@ -56,6 +57,7 @@ com/stonks/model/UserFund.class
 com/stonks/dto/HistoricDataDTO.class
 com/stonks/service/SIPService.class
 com/stonks/util/Constants.class
+com/stonks/config/WebConfig$ReactRouterResourceResolver.class
 com/stonks/service/TransactionService.class
 com/stonks/dto/UserFundDTO.class
 com/stonks/util/ClockProvider.class

@@ -77,7 +77,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       value: formatCurrency(dashboardData.totalInvested),
       icon: Wallet,
       color: 'text-slate-700',
-      bgColor: 'bg-gradient-to-br from-slate-50 to-slate-100',
+      bgColor: 'bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-800',
       iconBg: 'bg-slate-600',
       description: 'Total amount invested across all funds',
       glow: 'shadow-slate-200'
@@ -87,7 +87,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       value: formatCurrency(dashboardData.totalValue),
       icon: Target,
       color: 'text-blue-700',
-      bgColor: 'bg-gradient-to-br from-blue-50 to-blue-100',
+      bgColor: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-800 dark:to-blue-900',
       iconBg: 'bg-blue-600',
       description: 'Current market value of your portfolio',
       glow: 'shadow-blue-200'
@@ -98,7 +98,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       percentage: formatPercentage(dashboardData.profitLossPercent),
       icon: isProfit ? TrendingUp : TrendingDown,
       color: isProfit ? 'text-green-700' : 'text-red-700',
-      bgColor: isProfit ? 'bg-gradient-to-br from-green-50 to-green-100' : 'bg-gradient-to-br from-red-50 to-red-100',
+      bgColor: isProfit ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-800 dark:to-green-900' : 'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-800 dark:to-red-900',
       iconBg: isProfit ? 'bg-green-600' : 'bg-red-600',
       description: 'Current unrealized profit/loss',
       glow: isProfit ? 'shadow-green-200' : 'shadow-red-200'
@@ -108,7 +108,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       value: formatCurrency(dashboardData.totalEmergencyFundValue),
       icon: Shield,
       color: 'text-amber-700',
-      bgColor: 'bg-gradient-to-br from-amber-50 to-amber-100',
+      bgColor: 'bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-800 dark:to-amber-900',
       iconBg: 'bg-amber-600',
       description: 'Value of emergency fund investments',
       glow: 'shadow-amber-200'
@@ -162,11 +162,11 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
     <div className="space-y-8">
       {/* Welcome Panel with Quotes */}
       {(quotes.length > 0 || dashboardData.userName) && (
-        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
           {/* Animated Background Elements */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-100/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-100/30 dark:bg-blue-900/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-100/30 dark:bg-purple-900/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
 
           <div className="relative z-10 px-8 py-8">
@@ -177,21 +177,21 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
                   <PieChart className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-1">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">
                     Welcome Back, {dashboardData.userName || 'User'} 👋
                   </h2>
-                  <p className="text-gray-600 text-base font-medium">
+                  <p className="text-gray-600 dark:text-gray-400 text-base font-medium">
                     Your investment journey continues
                   </p>
                   {dashboardData.todayMessage && (
                     <p className="mt-3">
                       <span className={`text-base font-bold px-3 py-1.5 rounded-lg inline-block border-2 ${
                         dashboardData.todayProfit >= 0 
-                          ? 'text-green-700 bg-green-50 border-green-300' 
-                          : 'text-red-700 bg-red-50 border-red-300'
+                          ? 'text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/30 border-green-300 dark:border-green-700' 
+                          : 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/30 border-red-300 dark:border-red-700'
                       }`}>
                         Today's Update: <span className={`font-semibold ${
-                          dashboardData.todayProfit >= 0 ? 'text-green-800' : 'text-red-800'
+                          dashboardData.todayProfit >= 0 ? 'text-green-800 dark:text-green-300' : 'text-red-800 dark:text-red-300'
                         }`}>{dashboardData.todayMessage}</span>
                       </span>
                     </p>
@@ -202,18 +202,18 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
               {dashboardData.todayProfit != null && (
                 <div className={`px-6 py-4 rounded-xl shadow-lg border-2 ${
                   dashboardData.todayProfit >= 0 
-                    ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200' 
-                    : 'bg-gradient-to-r from-red-50 to-rose-50 border-red-200'
+                    ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-green-200 dark:border-green-700' 
+                    : 'bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/30 dark:to-rose-900/30 border-red-200 dark:border-red-700'
                 }`}>
-                  <p className="text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wider">Today's P&L</p>
+                  <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wider">Today's P&L</p>
                   <div className="flex items-center space-x-2">
                     {dashboardData.todayProfit >= 0 ? (
-                      <TrendingUp className="w-5 h-5 text-green-600" />
+                      <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
                     ) : (
-                      <TrendingDown className="w-5 h-5 text-red-600" />
+                      <TrendingDown className="w-5 h-5 text-red-600 dark:text-red-400" />
                     )}
                     <p className={`text-2xl font-bold ${
-                      dashboardData.todayProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                      dashboardData.todayProfit >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                     }`}>
                       {formatCurrency(Math.abs(dashboardData.todayProfit))}
                     </p>
@@ -224,7 +224,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
 
             {/* Quotes Display */}
             {quotes.length > 0 && (
-              <div className="bg-gradient-to-r from-blue-50/50 to-purple-50/50 rounded-xl p-8 backdrop-blur-sm">
+              <div className="bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 backdrop-blur-sm">
                 <div className="text-center">
                   {/* Quote Icon */}
                   <div className="flex justify-center mb-6">
@@ -234,7 +234,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
                   </div>
                   
                   {/* Quote Text */}
-                  <blockquote className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed italic">
+                  <blockquote className="text-xl md:text-2xl text-gray-800 dark:text-gray-200 font-medium leading-relaxed italic">
                     "{quotes[currentQuoteIndex]}"
                   </blockquote>
                 </div>
@@ -245,16 +245,16 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       )}
 
       {/* Main Portfolio Overview */}
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-        <div className="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-blue-600 rounded-lg">
+              <div className="p-2 bg-blue-600 dark:bg-blue-500 rounded-lg">
                 <BarChart3 className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900">Financial Metrics</h3>
-                <p className="text-sm text-gray-600">Real-time portfolio performance</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Portfolio Overview</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Real-time portfolio performance</p>
               </div>
             </div>
             {onShowPerformanceTrend && (
@@ -283,10 +283,10 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
                     <metric.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-medium text-gray-600 mb-1 uppercase tracking-wider">{metric.title}</p>
-                    <p className={`text-2xl font-bold ${metric.color} drop-shadow-sm`}>{metric.value}</p>
+                    <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wider">{metric.title}</p>
+                    <p className={`text-2xl font-bold ${metric.color} dark:text-white drop-shadow-sm`}>{metric.value}</p>
                     {metric.percentage && (
-                      <p className={`text-sm font-bold mt-1 ${metric.color} inline-flex items-center px-2 py-1 rounded-lg bg-white/50`}>
+                      <p className={`text-sm font-bold mt-1 ${metric.color} dark:text-white inline-flex items-center px-2 py-1 rounded-lg bg-white/50 dark:bg-gray-700/50`}>
                         {isProfit && index === 2 && '📈 '}
                         {!isProfit && index === 2 && '📉 '}
                         {metric.percentage}
@@ -294,7 +294,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
                     )}
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed font-medium">{metric.description}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{metric.description}</p>
               </div>
             ))}
           </div>
@@ -302,7 +302,7 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
       </div>
 
       {/* Detailed Metrics Section */}
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-5 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-purple-600/90"></div>
           <div className="relative z-10 flex items-center space-x-4">
@@ -330,45 +330,45 @@ const PortfolioSummary = ({ dashboardData, dashboardExtraData, onLoadExtraData, 
                       <metric.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-right">
-                      <p className="text-xs font-medium text-gray-600 mb-1 uppercase tracking-wider">{metric.title}</p>
-                      <p className={`text-2xl font-bold ${metric.color} drop-shadow-sm`}>{metric.value}</p>
+                      <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wider">{metric.title}</p>
+                      <p className={`text-2xl font-bold ${metric.color} dark:text-gray-100 drop-shadow-sm`}>{metric.value}</p>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-600 leading-relaxed font-medium">{metric.description}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{metric.description}</p>
                 </div>
               ))}
             </div>
           ) : loadingExtra ? (
             <div className="py-8">
               <div className="flex items-center justify-center mb-6">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-400"></div>
-                <span className="ml-2 text-sm text-gray-600">Loading Analytics...</span>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-400 dark:border-gray-500"></div>
+                <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Loading Analytics...</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[1, 2, 3, 4].map((index) => (
-                  <div key={index} className="bg-gray-50 rounded-lg p-5 border border-gray-200 animate-pulse">
+                  <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-5 border border-gray-200 dark:border-gray-600 animate-pulse">
                     <div className="flex items-start justify-between mb-3">
-                      <div className="w-8 h-8 bg-gray-200 rounded"></div>
+                      <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded"></div>
                       <div className="text-right">
-                        <div className="h-3 bg-gray-200 rounded w-16 mb-2"></div>
-                        <div className="h-5 bg-gray-200 rounded w-20"></div>
+                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-16 mb-2"></div>
+                        <div className="h-5 bg-gray-200 dark:bg-gray-600 rounded w-20"></div>
                       </div>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded w-20"></div>
+                    <div className="h-2 bg-gray-200 dark:bg-gray-600 rounded w-20"></div>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="py-12 text-center">
+              <div className="py-12 text-center">
               <div className="mb-6 relative inline-block">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
-                <div className="relative p-6 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full">
-                  <BarChart3 className="w-12 h-12 text-purple-600" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 dark:from-purple-600 dark:to-indigo-600 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                <div className="relative p-6 bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/50 dark:to-indigo-900/50 rounded-full">
+                  <BarChart3 className="w-12 h-12 text-purple-600 dark:text-purple-400" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Unlock Advanced Insights</h3>
-              <p className="text-sm text-gray-600 mb-8 max-w-md mx-auto leading-relaxed">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Unlock Advanced Insights</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto leading-relaxed">
                 Dive deep into your investment performance with real-time analytics, XIRR calculations, and long-term gains analysis
               </p>
               <button

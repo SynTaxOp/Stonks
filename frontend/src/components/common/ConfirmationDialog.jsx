@@ -15,14 +15,14 @@ const ConfirmationDialog = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full mx-auto overflow-hidden">
         <div className="p-6">
           {/* Icon */}
           <div className={`mx-auto flex items-center justify-center h-14 w-14 rounded-full mb-4 ${
-            isDestructive ? 'bg-red-100' : 'bg-blue-100'
+            isDestructive ? 'bg-red-100 dark:bg-red-900/30' : 'bg-blue-100 dark:bg-blue-900/30'
           }`}>
             <svg 
-              className={`h-7 w-7 ${isDestructive ? 'text-red-600' : 'text-blue-600'}`} 
+              className={`h-7 w-7 ${isDestructive ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`} 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -46,13 +46,13 @@ const ConfirmationDialog = ({
           </div>
           
           {/* Title */}
-          <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 text-center mb-3">
             {title}
           </h3>
           
           {/* Message */}
           <div className="mb-6">
-            <p className="text-sm text-gray-600 text-center leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed">
               {message}
             </p>
           </div>
@@ -62,7 +62,7 @@ const ConfirmationDialog = ({
             <button
               onClick={onClose}
               disabled={isLoading}
-              className="px-6 py-2.5 bg-gray-100 text-gray-700 text-base font-semibold rounded-lg shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-base font-semibold rounded-lg shadow-sm hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {cancelText}
             </button>

@@ -26,23 +26,23 @@ const LoadingSpinner = () => {
         `}
       </style>
       
-      <div className="bg-gray-50 flex items-center justify-center py-24">
+      <div className="bg-gray-50 dark:bg-transparent flex items-center justify-center py-24">
         <div className="text-center">
           {/* Rotating ring animation */}
           <div className="relative mx-auto mb-8 w-24 h-24">
             {/* Outer rotating ring */}
             <div className="absolute inset-0">
-              <div className="w-full h-full border-4 border-gray-200 border-t-green-500 rounded-full animate-spin"></div>
+              <div className="w-full h-full border-4 border-gray-200 dark:border-gray-700 border-t-green-500 dark:border-t-green-400 rounded-full animate-spin"></div>
             </div>
             
             {/* Middle ring */}
             <div className="absolute inset-4">
-              <div className="w-full h-full border-4 border-gray-200 border-b-green-500 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+              <div className="w-full h-full border-4 border-gray-200 dark:border-gray-700 border-b-green-500 dark:border-b-green-400 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
             </div>
             
             {/* Inner ring */}
             <div className="absolute inset-8">
-              <div className="w-full h-full border-2 border-gray-200 border-r-green-400 rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
+              <div className="w-full h-full border-2 border-gray-200 dark:border-gray-700 border-r-green-400 dark:border-r-green-500 rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
             </div>
             
             {/* Center icon */}
@@ -63,12 +63,12 @@ const LoadingSpinner = () => {
             <p className="text-xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 bg-clip-text text-transparent bg-[length:200%_auto] shimmer-animation">
               one byte at a time.
             </p>
-            <p className="text-gray-500 text-sm mt-2">- Please wait.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">- Please wait.</p>
           </div>
 
           {/* Animated progress bar */}
           <div className="mt-8 w-64 mx-auto">
-            <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-full loading-animation" style={{ width: '40%' }}></div>
             </div>
           </div>

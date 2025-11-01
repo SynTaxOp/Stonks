@@ -90,7 +90,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
@@ -120,7 +120,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
         </div>
 
         {/* Main Content Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100 dark:border-gray-700">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             {/* Left Side - Features */}
             <div className="hidden md:block">
@@ -128,7 +128,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Why Choose Stonks?</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Why Choose Stonks?</h3>
               </div>
               <div className="space-y-5">
                 {features.map((feature, index) => {
@@ -139,8 +139,8 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                         <Icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-gray-900 font-semibold text-lg">{feature.text}</h4>
-                        <p className="text-gray-500 text-sm mt-1">
+                        <h4 className="text-gray-900 dark:text-gray-100 font-semibold text-lg">{feature.text}</h4>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                           {feature.text === 'Track Performance' && 'Monitor your investment returns in real-time'}
                           {feature.text === 'Portfolio Analytics' && 'Deep insights into your portfolio performance'}
                           {feature.text === 'Lifetime Free' && 'No charges, no subscriptions, free forever'}
@@ -160,11 +160,11 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                     <LogIn className="w-5 h-5 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                     Welcome Back
                   </h2>
                 </div>
-                <p className="text-gray-600 mt-2">
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
                   Sign in to access your investment dashboard
                 </p>
               </div>
@@ -172,7 +172,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Login ID */}
                 <div>
-                  <label htmlFor="loginId" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="loginId" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Login ID
                   </label>
                   <input
@@ -182,9 +182,9 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                     required
                     className={`w-full px-4 py-3 rounded-xl border-2 ${
                       errors.loginId 
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                        : 'border-gray-200 focus:border-blue-500 focus:ring-blue-500'
-                    } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                        ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
+                        : 'border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400'
+                    } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                     placeholder="Enter your login ID"
                     value={formData.loginId}
                     onChange={handleChange}
@@ -200,7 +200,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
 
                 {/* Password */}
                 <div>
-                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Password
                   </label>
                   <div className="relative">
@@ -211,9 +211,9 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                       required
                       className={`w-full px-4 py-3 pr-12 rounded-xl border-2 ${
                         errors.password 
-                          ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-                          : 'border-gray-200 focus:border-blue-500 focus:ring-blue-500'
-                      } text-gray-900 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200`}
+                          ? 'border-red-300 dark:border-red-600 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400' 
+                          : 'border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400'
+                      } text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 focus:outline-none focus:ring-2 transition-all duration-200`}
                       placeholder="Enter your password"
                       value={formData.password}
                       onChange={handleChange}

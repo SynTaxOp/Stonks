@@ -390,10 +390,10 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <LoadingSpinner />
-          <p className="mt-4 text-sm text-gray-500">Loading fund details...</p>
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">Loading fund details...</p>
         </div>
       </div>
     );
@@ -401,7 +401,7 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center max-w-md w-full">
           <ErrorMessage message={error} onClose={() => setError(null)} />
           <button
@@ -421,11 +421,11 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
 
   if (!fundDetails) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center max-w-md w-full">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
-            <PieChart className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-sm text-gray-500 mb-6">No fund details found</p>
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+            <PieChart className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">No fund details found</p>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -445,9 +445,9 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
   const { userFundDTO, summary, extraSummary, units, registeredSIPs } = fundDetails;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-8 py-6">
           {/* Top Row - Back & Title */}
           <div className="flex items-center justify-between mb-6">
@@ -457,7 +457,7 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
                 onBack();
               }}
               type="button"
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
             >
               <ArrowLeft className="h-5 w-5" />
               <span className="text-sm font-medium">Back to Dashboard</span>
@@ -465,7 +465,7 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
               <span>{refreshing ? 'Refreshing...' : 'Refresh'}</span>
@@ -475,18 +475,18 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
           {/* Fund Name Section */}
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">{fund.schemeName}</h1>
+              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">{fund.schemeName}</h1>
               <div className="flex flex-wrap items-center gap-4">
                 {fundDetails?.latestNav && (
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">NAV:</span>
-                    <span className="text-lg font-semibold text-gray-900">₹{fundDetails.latestNav.toFixed(2)}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">NAV:</span>
+                    <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">₹{fundDetails.latestNav.toFixed(2)}</span>
                   </div>
                 )}
                 {fundDetails?.latestNavDate && (
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">Date:</span>
-                    <span className="text-sm font-medium text-gray-700">{formatDate(fundDetails.latestNavDate)}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">Date:</span>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{formatDate(fundDetails.latestNavDate)}</span>
                   </div>
                 )}
                 <button
@@ -570,27 +570,27 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
         {/* Fund Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           {/* Total Invested */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-50 rounded-lg">
                 <Coins className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Total Invested</p>
-                <p className="text-xl font-bold text-gray-900">{formatCurrency(summary?.totalInvested)}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Invested</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{formatCurrency(summary?.totalInvested)}</p>
               </div>
             </div>
           </div>
 
           {/* Current Value */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-green-50 rounded-lg">
                 <TrendingUp className="h-5 w-5 text-green-600" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Current Value</p>
-                <p className="text-xl font-bold text-gray-900">{formatCurrency(summary?.totalValue)}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Current Value</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{formatCurrency(summary?.totalValue)}</p>
                 {summary?.todayProfit != null && (
                   <p className={`text-sm font-semibold mt-1.5 ${
                     summary.todayProfit >= 0 ? 'text-green-600' : 'text-red-600'
@@ -603,7 +603,7 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
           </div>
 
           {/* Profit/Loss */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-4">
               <div className={`p-3 rounded-lg ${
                 (summary?.profitLoss || 0) >= 0 ? 'bg-green-50' : 'bg-red-50'
@@ -613,7 +613,7 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
                 }`} />
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Profit/Loss</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Profit/Loss</p>
                 <p className={`text-xl font-bold ${
                   (summary?.profitLoss || 0) >= 0 ? 'text-green-600' : 'text-red-600'
                 }`}>
@@ -629,27 +629,27 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
           </div>
 
           {/* XIRR */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-purple-50 rounded-lg">
                 <Activity className="h-5 w-5 text-purple-600" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">XIRR</p>
-                <p className="text-xl font-bold text-gray-900">{formatPercentage(extraSummary?.xirr)}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">XIRR</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{formatPercentage(extraSummary?.xirr)}</p>
               </div>
             </div>
           </div>
 
           {/* Long Term Gains */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-indigo-50 rounded-lg">
                 <TrendingUp className="h-5 w-5 text-indigo-600" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Long Term Gains</p>
-                <p className="text-xl font-bold text-gray-900">{formatCurrency(extraSummary?.longTermGains)}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Long Term Gains</p>
+                <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{formatCurrency(extraSummary?.longTermGains)}</p>
               </div>
             </div>
           </div>
@@ -658,20 +658,20 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
         {/* Fund Information Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Fund Details Card */}
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Fund Information</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Fund Information</h3>
             </div>
             <div className="p-6 space-y-4">
               {/* Fund Name */}
-              <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">Fund Name</span>
-                <span className="text-sm font-medium text-gray-900">{userFundDTO?.fundName}</span>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Fund Name</span>
+                <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{userFundDTO?.fundName}</span>
               </div>
 
               {/* Tag */}
-              <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">Tag</span>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Tag</span>
                 {isEditingTag ? (
                   <div className="flex items-center space-x-2">
                     <input
@@ -692,14 +692,14 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
                     <button
                       onClick={handleTagCancel}
                       disabled={isUpdating}
-                      className="p-1.5 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                      className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-50"
                     >
                       <X className="h-4 w-4" />
                     </button>
                   </div>
                 ) : (
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-900">{userFundDTO?.tag || 'No tag'}</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{userFundDTO?.tag || 'No tag'}</span>
                     <button
                       onClick={handleTagEdit}
                       disabled={isUpdating}
@@ -712,8 +712,8 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
               </div>
 
               {/* Benchmark */}
-              <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">Benchmark</span>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Benchmark</span>
                 {isEditingBenchmark ? (
                   <div className="flex items-center space-x-2">
                     <select
@@ -738,14 +738,14 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
                     <button
                       onClick={handleBenchmarkCancel}
                       disabled={isUpdating}
-                      className="p-1.5 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                      className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-50"
                     >
                       <X className="h-4 w-4" />
                     </button>
                   </div>
                 ) : (
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-900">{userFundDTO?.benchmark || 'Not Set'}</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{userFundDTO?.benchmark || 'Not Set'}</span>
                     <button
                       onClick={handleBenchmarkEdit}
                       disabled={isUpdating}
@@ -758,8 +758,8 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
               </div>
 
               {/* Emergency Fund */}
-              <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">Emergency Fund</span>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Emergency Fund</span>
                 <div className="flex items-center space-x-3">
                   <span className={`text-sm font-medium flex items-center ${
                     userFundDTO?.isEmergency ? 'text-red-600' : 'text-green-600'
@@ -791,8 +791,8 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
 
               {/* Total Units */}
               <div className="flex items-center justify-between py-3">
-                <span className="text-sm text-gray-500">Total Units</span>
-                <span className="text-sm font-semibold text-gray-900">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Total Units</span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                   {summary?.totalUnits != null ? summary.totalUnits.toFixed(4) : '0.0000'}
                 </span>
               </div>
