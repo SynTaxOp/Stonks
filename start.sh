@@ -1,61 +1,82 @@
 #!/bin/bash
 
+# Startup script: Starts Backend → Waits → Starts Nginx
+
+set -e
+
 echo "🚀 Starting Stonks Application..."
 
-# Kill existing processes
-echo "🔄 Stopping existing processes..."
-kill -9 $(lsof -t -i:8080) 2>/dev/null || true
-kill -9 $(lsof -t -i:3000) 2>/dev/null || true
-pkill -f "react-scripts start" 2>/dev/null || true
-sleep 2
+# Function to check if backend is ready
+check_backend() {
+    curl -f http://localhost:8080/api/health > /dev/null 2>&1
+}
 
-# Start Backend
-echo "🔧 Starting Backend (Spring Boot)..."
-echo "📦 Building backend..."
-mvn clean install -DskipTests
-
-# Start backend in background
-if [ -f ".mvn/wrapper/maven-wrapper.properties" ]; then
-  ./mvnw spring-boot:run > backend.log 2>&1 &
-else
-  mvn spring-boot:run > backend.log 2>&1 &
-fi
+# Step 1: Start Backend in background
+echo "📦 Starting Backend Server..."
+java -jar /app/app.jar > /var/log/backend.log 2>&1 &
 BACKEND_PID=$!
 
-echo "⏳ Waiting for backend to start on port 8080..."
-# Wait for backend to be ready (check port 8080)
-for i in {1..60}; do
-  if lsof -ti:8080 > /dev/null 2>&1; then
-    echo "✅ Backend is ready!"
+echo "⏳ Waiting for Backend to be ready..."
+# Wait for backend to be ready (max 120 seconds)
+MAX_WAIT=120
+WAIT_TIME=0
+while ! check_backend; do
+    if [ $WAIT_TIME -ge $MAX_WAIT ]; then
+        echo "❌ Backend failed to start within $MAX_WAIT seconds"
+        kill $BACKEND_PID 2>/dev/null || true
+        exit 1
+    fi
     sleep 2
-    break
-  fi
-  if [ $i -eq 60 ]; then
-    echo "⚠️  Backend may not have started properly. Check backend.log for details."
-  fi
-  sleep 1
+    WAIT_TIME=$((WAIT_TIME + 2))
+    echo "   Waiting... (${WAIT_TIME}s/${MAX_WAIT}s)"
 done
 
-# Start Frontend
-echo "🌐 Starting Frontend (React)..."
-cd frontend
+echo "✅ Backend is ready on http://localhost:8080"
 
-# Check if node_modules exists, install if not
-if [ ! -d "node_modules" ]; then
-  echo "📦 Installing frontend dependencies..."
-  npm install
-fi
+# Step 2: Start Nginx
+echo "🌐 Starting Nginx..."
+nginx -g "daemon off;" &
+NGINX_PID=$!
 
-# Set environment variables
-export REACT_APP_API_URL=http://localhost:8080
+# Wait a moment for nginx to start
+sleep 2
+echo "✅ Nginx is ready on http://localhost:80"
 
-echo "🚀 Starting React development server..."
-echo "📱 Frontend will be available at: http://localhost:3000"
-echo "🔗 Backend API URL: http://localhost:8080"
+# Function to handle shutdown
+cleanup() {
+    echo ""
+    echo "🛑 Shutting down..."
+    kill $NGINX_PID 2>/dev/null || true
+    kill $BACKEND_PID 2>/dev/null || true
+    wait
+    echo "✅ Shutdown complete"
+    exit 0
+}
+
+# Trap signals for graceful shutdown
+trap cleanup SIGTERM SIGINT
+
+# Keep script running and monitor processes
 echo ""
-echo "✅ Both services are starting..."
-echo "📋 Backend logs: backend.log"
-echo "💡 Press Ctrl+C to stop both services"
+echo "✨ Application is running!"
+echo "   Backend: http://localhost:8080"
+echo "   Frontend: http://localhost:80"
+echo ""
+echo "Press Ctrl+C to stop"
 
-# Start frontend (this will run in foreground)
-npm start
+# Monitor processes
+while true; do
+    # Check if backend is still running
+    if ! kill -0 $BACKEND_PID 2>/dev/null; then
+        echo "❌ Backend process died, shutting down..."
+        cleanup
+    fi
+    
+    # Check if nginx is still running
+    if ! kill -0 $NGINX_PID 2>/dev/null; then
+        echo "❌ Nginx process died, shutting down..."
+        cleanup
+    fi
+    
+    sleep 5
+done

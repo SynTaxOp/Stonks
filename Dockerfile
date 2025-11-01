@@ -1,5 +1,5 @@
-# Multi-stage build for Stonks Application
-# Builds both Backend and Frontend separately
+# Single-Container Dockerfile
+# Builds Backend + Frontend, runs both in one container
 
 # ============================================
 # Stage 1: Backend Build
@@ -35,7 +35,6 @@ RUN npm install
 COPY frontend/ .
 
 # Build argument for API URL (use relative path since nginx will proxy)
-# For production, frontend will use /api/ which nginx proxies to backend
 ARG REACT_APP_API_URL=
 ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
@@ -43,45 +42,37 @@ ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 RUN npm run build
 
 # ============================================
-# Stage 3: Backend Runtime
+# Stage 3: Final Runtime (Backend + Nginx)
 # ============================================
-FROM eclipse-temurin:21-jre-alpine AS backend-runtime
+FROM eclipse-temurin:21-jre-alpine
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+# Install Nginx and curl for health checks
+RUN apk add --no-cache nginx curl bash
 
 WORKDIR /app
 
-# Copy the backend JAR
+# Copy backend JAR
 COPY --from=backend-build /app/target/stocks-api-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose port
-EXPOSE 8080
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-  CMD curl -f http://localhost:8080/api/health || exit 1
-
-# Run Spring Boot application (backend only, no frontend)
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# ============================================
-# Stage 4: Frontend Runtime (Nginx)
-# ============================================
-FROM nginx:alpine AS frontend-runtime
-
-# Copy built frontend from frontend-build stage
+# Copy frontend build
 COPY --from=frontend-build /app/build /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/http.d/default.conf
 
-# Expose port
-EXPOSE 80
+# Copy startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Create nginx directories
+RUN mkdir -p /var/log/nginx /var/lib/nginx /run/nginx
+
+# Expose ports
+EXPOSE 8080 80
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:80 || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:80/health && curl -f http://localhost:8080/api/health || exit 1
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start backend and nginx via startup script
+CMD ["/start.sh"]
