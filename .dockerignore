@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+QUICK_START.md
+DEPLOYMENT.md
+HELP.md
+*.md
+
+# IDE
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Build artifacts
+target/
+frontend/build/
+frontend/dist/
+frontend/node_modules/
+
+# Logs
+*.log
+logs/
+backend.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Scripts (not needed in Docker)
+start.sh
+frontend/start-frontend.sh
+frontend/check-status.sh
+
+# Maven wrapper (optional - uncomment if you don't want to include it)
+# .mvn/
+# mvnw
+# mvnw.cmd
+

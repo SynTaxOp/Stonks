@@ -74,29 +74,18 @@ cp .env.example .env
 # Edit .env and add your MongoDB connection string:
 # MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/...
 
-# 3. Build Docker images
-docker build -f Dockerfile.backend -t stonks-backend .
-docker build -f Dockerfile.frontend -t stonks-frontend .
+# 3. Build Docker image (builds both backend and frontend)
+docker build -t stonks-app .
 
-# 4. Create Docker network
-docker network create stonks-network
-
-# 5. Start backend container
-docker run -d --name stonks-backend \
-  --network stonks-network \
+# 4. Start container
+docker run -d --name stonks-app \
   -p 8080:8080 \
   -e SPRING_DATA_MONGODB_URI="your-mongodb-uri" \
-  stonks-backend
+  stonks-app
 
-# 6. Start frontend container
-docker run -d --name stonks-frontend \
-  --network stonks-network \
-  -p 80:80 \
-  stonks-frontend
-
-# 7. Access the application
-# Frontend: http://localhost
-# Backend: http://localhost:8080
+# 5. Access the application
+# Frontend & Backend: http://localhost:8080
+# API: http://localhost:8080/api/*
 ```
 
 **Using Docker Compose (if available):**
@@ -113,17 +102,16 @@ docker-compose -f docker-compose.dev.yml up
 
 ```bash
 # View logs
-docker logs -f stonks-backend
-docker logs -f stonks-frontend
+docker logs -f stonks-app
 
-# Stop containers
-docker stop stonks-backend stonks-frontend
+# Stop container
+docker stop stonks-app
 
-# Restart containers
-docker restart stonks-backend stonks-frontend
+# Restart container
+docker restart stonks-app
 
-# Remove containers
-docker rm stonks-backend stonks-frontend
+# Remove container
+docker rm stonks-app
 
 # View container status
 docker ps | grep stonks
@@ -212,11 +200,9 @@ Stonks/
 │       ├── contexts/            # React contexts
 │       ├── services/            # API services
 │       └── types/               # TypeScript types
-├── Dockerfile.backend           # Backend Docker image
-├── Dockerfile.frontend          # Frontend Docker image
+├── Dockerfile                    # Single Dockerfile (backend + frontend)
 ├── docker-compose.yml           # Production Docker Compose
 ├── docker-compose.dev.yml       # Development Docker Compose
-├── nginx.conf                   # Nginx configuration
 ├── .dockerignore                # Docker ignore rules
 ├── .env.example                 # Environment variables template
 ├── pom.xml                      # Maven configuration
@@ -319,27 +305,29 @@ npm test
 ### Using Docker (Recommended) 🐳
 
 ```bash
-# Build images
-docker build -f Dockerfile.backend -t stonks-backend .
-docker build -f Dockerfile.frontend -t stonks-frontend .
+# Build image (builds both backend and frontend)
+docker build -t stonks-app .
 
 # Or using docker-compose
 docker-compose build
 
-# Run containers
+# Run container
 docker-compose up -d
 
 # Verify
 docker ps
 curl http://localhost:8080/api/health
+curl http://localhost:8080
 ```
 
 **Production Optimizations:**
+- Single container with both backend and frontend
 - Multi-stage builds reduce image size
-- Backend: ~150MB (Alpine JRE)
-- Frontend: ~25MB (Nginx Alpine)
+- Total size: ~200MB (Alpine JRE + embedded frontend)
+- Frontend served from Spring Boot static resources
 - Health checks enabled
 - Automatic restart on failure
+- Single port (8080) for both API and frontend
 
 ### Manual Build
 
@@ -395,25 +383,25 @@ docker-compose down
 
 #### Deploying to Cloud Platforms
 
-**1. Build and Tag Images:**
+**1. Build and Tag Image:**
 ```bash
-docker build -f Dockerfile.backend -t your-registry/stonks-backend:latest .
-docker build -f Dockerfile.frontend -t your-registry/stonks-frontend:latest .
+docker build -t your-registry/stonks-app:latest .
 ```
 
 **2. Push to Registry:**
 ```bash
-docker push your-registry/stonks-backend:latest
-docker push your-registry/stonks-frontend:latest
+docker push your-registry/stonks-app:latest
 ```
 
 **3. Deploy to Cloud:**
 
 - **AWS ECS/EC2**: Use docker-compose or ECS task definitions
-- **Google Cloud Run**: Deploy containers using gcloud CLI
+- **Google Cloud Run**: Deploy single container using gcloud CLI
 - **Azure Container Instances**: Use Azure CLI or portal
 - **Heroku**: Use Container Registry
 - **DigitalOcean**: Use App Platform or Droplets with Docker
+- **Railway**: Connect GitHub repo and deploy
+- **Fly.io**: Deploy with flyctl CLI
 
 **4. Environment Variables:**
 ```bash
