@@ -800,23 +800,23 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
           </div>
 
           {/* Registered SIPs Card */}
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Registered SIPs</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Registered SIPs</h3>
             </div>
             <div className="p-6">
               {registeredSIPs && registeredSIPs.length > 0 ? (
                 <div className="space-y-3">
                   {registeredSIPs.map((sip, index) => (
-                    <div key={sip.id || index} className="p-4 bg-purple-50 rounded-lg border border-purple-100">
+                    <div key={sip.id || index} className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-100 dark:border-purple-800">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-semibold text-gray-900 mb-1">{sip.fundName}</p>
-                          <p className="text-xs text-gray-500">Monthly SIP</p>
+                          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">{sip.fundName}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Monthly SIP</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-gray-900">{formatCurrency(sip.amount)}</p>
-                          <p className="text-xs text-gray-500">per month</p>
+                          <p className="text-lg font-bold text-gray-900 dark:text-gray-100">{formatCurrency(sip.amount)}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">per month</p>
                         </div>
                       </div>
                     </div>
@@ -824,9 +824,9 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
                 </div>
               ) : (
                 <div className="py-12 text-center">
-                  <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                  <p className="text-sm text-gray-500 mb-2">No SIPs registered</p>
-                  <p className="text-xs text-gray-400">Click "Register SIP" to set up a new SIP</p>
+                  <Calendar className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">No SIPs registered</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">Click "Register SIP" to set up a new SIP</p>
                 </div>
               )}
             </div>
@@ -834,11 +834,11 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
         </div>
 
         {/* Units History */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">Units History</h3>
-              <div className="flex items-center space-x-4 text-xs text-gray-500">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Units History</h3>
+              <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
                 <div className="flex items-center space-x-2">
                   <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
                   <span>Active</span>
@@ -856,33 +856,33 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
           </div>
           <div className="overflow-x-auto">
             {units && units.length > 0 ? (
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       Date
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       Type
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       Amount
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       Units
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       P&L
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       P&L %
                     </th>
-                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                       Action
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-100">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700">
                   {units.map((unit, index) => (
                     <UnitsRow
                       key={index}
@@ -898,9 +898,9 @@ const UserFundDetail = ({ fund, userId, onBack, onRecordTransaction, onRegisterS
               </table>
             ) : (
               <div className="text-center py-16">
-                <PieChart className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-sm text-gray-500 mb-2">No units history available</p>
-                <p className="text-xs text-gray-400">Record transactions to see units history</p>
+                <PieChart className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">No units history available</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">Record transactions to see units history</p>
               </div>
             )}
           </div>
